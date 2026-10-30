@@ -75,3 +75,99 @@
     background:linear-gradient(to bottom,rgba(255,255,255,0),#fff);
   }
 }
+
+/* Sulprint editorial portrait composition: desktop + mobile. Replaces the old isolated photo. */
+.hero-showcase{
+  position:absolute;z-index:2;inset:0 0 0 auto;width:49%;
+  pointer-events:none;overflow:hidden;
+  background:linear-gradient(115deg,rgba(12,18,57,.18),#111843 42%,#0a0f31 100%);
+}
+.hero-showcase::before{
+  content:"";position:absolute;z-index:1;inset:0;
+  background:linear-gradient(90deg,rgba(13,17,53,.25),transparent 58%);
+  pointer-events:none;
+}
+.hero-showcase-panel{
+  position:absolute;right:-4%;top:5%;height:100%;width:76%;
+  background:linear-gradient(136deg,#13235d 0%,#0c123d 45%,#151441 100%);
+  clip-path:polygon(17% 0,100% 0,100% 100%,0 100%);
+  box-shadow:inset 1px 0 40px rgba(0,0,0,.3);
+}
+.hero-showcase-panel::after{
+  content:"";position:absolute;left:16%;top:49%;height:3px;width:110%;
+  transform:rotate(-10deg);
+  background:linear-gradient(90deg,transparent,#ff1985 30%,#ff1985 85%,transparent);
+  box-shadow:0 0 13px #fc23809c;
+}
+.hero-showcase-stripes{position:absolute;inset:0;z-index:1}
+.hero-showcase-stripes span{
+  position:absolute;display:block;width:79%;height:9px;
+  top:10%;left:0;border-radius:9px;transform:rotate(-26deg);
+  background:linear-gradient(90deg,transparent 1%,#f72587 45%,#e81572);
+  box-shadow:0 0 14px #fb1e8060;
+}
+.hero-showcase-stripes span:nth-child(2){top:15%}
+.hero-showcase-stripes span:nth-child(3){top:20%}
+.hero-showcase-logo{
+  position:absolute;z-index:3;right:8%;top:22%;
+  color:#fff;display:flex;gap:10px;align-items:center;
+  transform:rotate(-9deg);text-shadow:0 2px 5px #070a2380;
+}
+.hero-showcase-symbol{height:61px;width:53px;display:block;position:relative;flex:none}
+.hero-showcase-symbol i{
+  position:absolute;display:block;width:45px;height:24px;left:3px;
+  border-bottom:4px solid #fb2388;border-left:4px solid #fb2388;
+  border-radius:0 0 0 5px;transform:skewY(-25deg)
+}
+.hero-showcase-symbol i:nth-child(1){top:0}
+.hero-showcase-symbol i:nth-child(2){top:10px}
+.hero-showcase-symbol i:nth-child(3){top:20px}
+.hero-showcase-symbol i:nth-child(4){top:30px}
+.hero-showcase-name strong{font-size:clamp(29px,3vw,50px);line-height:.83;display:block;letter-spacing:-2px;font-weight:900}
+.hero-showcase-name small{font-size:8px;font-weight:700;letter-spacing:1px;white-space:nowrap;display:block;margin-top:9px}
+.hero-showcase-motto{position:absolute;z-index:3;right:8%;bottom:15%;color:#fff;font-size:19px;line-height:1.06;font-style:italic;transform:rotate(-6deg);text-align:center;text-shadow:1px 2px 5px #000}
+.hero-showcase-motto em{color:#ff4ca0}
+.hero-showcase-portrait{
+  position:absolute;z-index:4;left:-4%;bottom:-2px;
+  height:91%;width:auto;max-width:none;max-height:none;object-fit:contain;
+  object-position:bottom center;filter:drop-shadow(12px 3px 14px rgba(0,0,0,.20));
+}
+@media (min-width:681px) and (max-width:1100px){
+  .hero-showcase{width:47%}
+  .hero-showcase-portrait{height:81%;left:-12%}
+  .hero-showcase-logo{right:3%;transform:rotate(-7deg) scale(.84);transform-origin:right center}
+  .hero-showcase-motto{font-size:14px}
+}
+@media (max-width:680px){
+  .hero{min-height:0;display:block;overflow:hidden}
+  .hero-inner{padding:46px 0 16px}
+  .hero-content{max-width:100%;position:relative;z-index:3}
+  .hero-showcase{
+    position:relative;inset:auto;display:block;width:100%;
+    height:clamp(250px,75vw,330px);margin-top:0;
+    background:linear-gradient(120deg,#0b1136 0%,#142059 48%,#10153f 100%);
+  }
+  .hero-showcase-panel{top:0;right:-2%;width:82%;height:103%}
+  .hero-showcase-stripes span{width:75%;height:6px;top:11%;left:0}
+  .hero-showcase-stripes span:nth-child(2){top:16%}
+  .hero-showcase-stripes span:nth-child(3){top:21%}
+  .hero-showcase-logo{top:26%;right:5%;gap:5px;transform:rotate(-8deg)}
+  .hero-showcase-symbol{height:38px;width:31px}
+  .hero-showcase-symbol i{height:14px;width:27px;border-bottom-width:3px;border-left-width:3px;left:1px}
+  .hero-showcase-symbol i:nth-child(1){top:0}
+  .hero-showcase-symbol i:nth-child(2){top:6px}
+  .hero-showcase-symbol i:nth-child(3){top:12px}
+  .hero-showcase-symbol i:nth-child(4){top:18px}
+  .hero-showcase-name strong{font-size:clamp(25px,8vw,36px);letter-spacing:-1.3px}
+  .hero-showcase-name small{font-size:5.5px;letter-spacing:.4px;margin-top:5px}
+  .hero-showcase-motto{font-size:clamp(12px,4vw,17px);right:5%;bottom:12%}
+  .hero-showcase-portrait{
+    left:0;top:0;bottom:auto;right:auto;transform:none;
+    height:120%;width:auto;max-width:none;max-height:none;
+    object-fit:contain;object-position:top left;
+    -webkit-mask-image:none;mask-image:none;filter:drop-shadow(7px 2px 9px rgba(0,0,0,.18));
+  }
+  .hero::after{display:none}
+  .services{padding-top:30px;margin-top:0;position:relative;z-index:2;background:#fff}
+  .hero-stamp{display:none}
+}
