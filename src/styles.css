@@ -39,3 +39,39 @@
  .hero-image{background-position:62% center}
  .services{margin-top:0}
 }
+
+/* Final hero portrait sizing — high-resolution transparent Sulprint image */
+.hero-person {
+  width:auto;
+  height:min(540px,88%);
+  max-height:none;
+  right:6%;
+  bottom:0;
+  object-fit:contain;
+  object-position:bottom center;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 94%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 94%,transparent 100%);
+}
+@media (min-width:681px) and (max-width:1100px) {
+  .hero-person {height:min(460px,80%);right:0}
+}
+@media (max-width:680px) {
+  .hero-inner {padding-bottom:350px}
+  .hero-person {
+    width:auto;
+    height:350px;
+    max-width:none;
+    max-height:none;
+    right:50%;
+    bottom:0;
+    transform:translateX(50%);
+    object-fit:contain;
+    object-position:bottom center;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 95%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 0%,#000 95%,transparent 100%);
+  }
+  .hero::after {
+    height:24px;
+    background:linear-gradient(to bottom,rgba(255,255,255,0),#fff);
+  }
+}
