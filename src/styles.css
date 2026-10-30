@@ -202,3 +202,6 @@
  .hero-perks{margin-bottom:0}
  .services{position:relative;z-index:2;margin-top:0;padding-top:27px;background:#fff}
 }
+
+/* Final mockup crop proportions without phone bezel */
+@media(max-width:680px){.hero-approved{aspect-ratio:264 / 275}}
