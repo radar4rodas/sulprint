@@ -6,3 +6,14 @@
 .service-card:hover{transform:none;box-shadow:0 11px 25px #12143e0a}
 .service-card:hover img,.project:hover img{transform:none}
 .project{cursor:default}
+
+/* Mobile hero: natural content height and seamless transition to services */
+@media (max-width:680px){
+  .hero{min-height:0;display:block;isolation:isolate}
+  .hero-inner{padding:52px 0 100px}
+  .hero-image{background-position:center center;background-size:cover}
+  .hero::after{content:"";position:absolute;z-index:1;pointer-events:none;left:0;right:0;bottom:-1px;height:105px;background:linear-gradient(to bottom,rgba(255,255,255,0),rgba(255,255,255,.18) 48%,#fff 100%)}
+  .hero-content{position:relative;z-index:2}
+  .hero-perks{margin-bottom:0}
+  .services{position:relative;z-index:2;background:#fff}
+}
