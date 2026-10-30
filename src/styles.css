@@ -26,3 +26,16 @@
  .hero-person{right:50%;transform:translateX(50%);width:230px;max-height:235px;bottom:0;z-index:2}
  .hero::after{z-index:3;height:38px;background:linear-gradient(to bottom,transparent,#fff)}
 }
+
+/* Banner alignment: professional hero portrait layout */
+.hero{overflow:hidden}
+.hero-person{right:6.5%;width:clamp(300px,31vw,435px);max-height:84%;object-fit:contain;object-position:bottom center;z-index:2;mix-blend-mode:normal;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 86%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 86%,transparent 100%)}
+.hero-content{position:relative;z-index:3}
+@media(min-width:1101px){.hero-content{max-width:min(650px,58%)}}
+@media(max-width:680px){
+ .hero-inner{padding-top:46px;padding-bottom:305px}
+ .hero-person{width:min(80vw,315px);height:auto;max-height:295px;right:50%;bottom:0;transform:translateX(50%);object-fit:contain;z-index:2;-webkit-mask-image:radial-gradient(ellipse 68% 67% at 50% 43%,#000 65%,transparent 100%);mask-image:radial-gradient(ellipse 68% 67% at 50% 43%,#000 65%,transparent 100%)}
+ .hero::after{height:35px;z-index:4;background:linear-gradient(to bottom,transparent,#fff)}
+ .hero-image{background-position:62% center}
+ .services{margin-top:0}
+}
