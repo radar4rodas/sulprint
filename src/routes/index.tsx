@@ -72,16 +72,15 @@ function Home(){
       </div>
       <div className="facade-compare-card">
         <div className="facade-compare-stage" role="group" aria-label="Comparação interativa: a mesma fachada, com ou sem a marca Sulprint" onPointerDown={startFacadeDrag} onPointerMove={moveFacadeDrag} onPointerUp={stopFacadeDrag} onPointerCancel={()=>{facadeDragging.current=false}} onLostPointerCapture={()=>{facadeDragging.current=false}}>
-          <img className="facade-compare-photo" src="/fachada-sulprint-antes.svg" alt="Antes: a mesma fachada comercial simples, sem acabamento especial ou letreiro externo" loading="lazy"/>
+          <img className="facade-compare-photo" src="/fachada-sulprint-antes.svg?v=20261030-4" alt="Antes: a mesma fachada comercial, com o revestimento azul-marinho e sem o letreiro Sulprint" loading="lazy"/>
           <div className="facade-compare-after" style={{clipPath:`inset(0 0 0 ${facadePosition}%)`}} aria-hidden="true">
-            <img className="facade-compare-photo" src="/fachada-sulprint-depois.svg" alt="" loading="lazy"/>
+            <img className="facade-compare-photo" src="/fachada-sulprint-depois.svg?v=20261030-4" alt="" loading="lazy"/>
           </div>
           <span className="facade-compare-tag facade-compare-tag-before" style={{opacity:facadePosition>16?1:0}}>ANTES</span>
           <span className="facade-compare-tag facade-compare-tag-after" style={{opacity:facadePosition<84?1:0}}>DEPOIS</span>
           <div className="facade-compare-divider" style={{left:`${facadePosition}%`}} aria-hidden="true">
             <span className="facade-compare-grip">↔</span>
           </div>
-          
         </div>
         <div className="facade-compare-footer">
           <div className="facade-compare-caption">
