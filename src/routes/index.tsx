@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowRight, Menu, X, Instagram, ArrowUpRight, MessageCircle, ChevronRight, CheckCircle2, Layers3, Printer, Building2, PanelTop, CarFront, PenTool, Sparkles } from "lucide-react";
+import { useRef, useState } from "react";
+import { ArrowRight, Menu, X, Instagram, ArrowUpRight, MessageCircle, ChevronRight, Layers3, Printer, Building2, PanelTop, CarFront, Sparkles } from "lucide-react";
 
 // Fotografias ilustrativas da biblioteca Pexels, selecionadas pela correspondência
 // visual ao serviço. Não representam trabalhos realizados pela Sulprint.
@@ -31,10 +31,34 @@ export const Route=createFileRoute("/")({head:()=>({meta:[{title:"Sulprint | Com
 function Home(){
  const [menu,setMenu]=useState(false);
  const [facadePosition,setFacadePosition]=useState(50);
+ const facadeDragging=useRef(false);
+ const updateFacadeFromPointer=(event:React.PointerEvent<HTMLDivElement>)=>{
+   const bounds=event.currentTarget.getBoundingClientRect();
+   if(bounds.width>0){
+     setFacadePosition(Math.max(0,Math.min(100,Math.round(100*(event.clientX-bounds.left)/bounds.width))));
+   }
+ };
+ const startFacadeDrag=(event:React.PointerEvent<HTMLDivElement>)=>{
+   if(event.pointerType==="mouse" && event.button!==0)return;
+   facadeDragging.current=true;
+   event.currentTarget.setPointerCapture(event.pointerId);
+   updateFacadeFromPointer(event);
+ };
+ const moveFacadeDrag=(event:React.PointerEvent<HTMLDivElement>)=>{
+   if(facadeDragging.current)updateFacadeFromPointer(event);
+ };
+ const stopFacadeDrag=(event:React.PointerEvent<HTMLDivElement>)=>{
+   if(!facadeDragging.current)return;
+   updateFacadeFromPointer(event);
+   facadeDragging.current=false;
+   if(event.currentTarget.hasPointerCapture(event.pointerId)){
+     event.currentTarget.releasePointerCapture(event.pointerId);
+   }
+ };
  return <div className="site">
   <header className="header"><div className="container nav"><Brand/><nav className={menu?"navlinks open":"navlinks"} aria-label="Menu principal">{[["Início","#inicio"],["Serviços","#servicos"],["Sobre","#sobre"],["Como funciona","#processo"],["Contato","#contato"]].map(([t,h])=><a key={h} href={h} onClick={()=>setMenu(false)}>{t}</a>)}</nav><ContactButton className="header-cta"/><button className="menu-toggle" aria-label={menu?"Fechar menu":"Abrir menu"} onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></div></header>
   <main>
-   <section className="hero" id="inicio"><div className="hero-image" style={{backgroundImage:`linear-gradient(90deg,rgba(11,15,54,.96) 0%,rgba(11,15,54,.84) 43%,rgba(11,15,54,.17) 100%),url('${photos.hero}')`}}/><div className="hero-lines" aria-hidden="true"><i/><i/><i/></div><div className="container hero-inner"><div className="hero-content"><span className="eyebrow light">COMUNICAÇÃO VISUAL QUE TRANSFORMA</span><h1>Sua marca ganha presença com <em>comunicação visual de impacto.</em></h1><p>Fachadas, adesivos, lonas, letras caixa, envelopamento e impressão digital. Soluções completas para destacar sua marca e atrair olhares.</p><div className="hero-actions"><ContactButton/></div><div className="hero-perks"><span><CheckCircle2/> Atendimento personalizado</span><span><PenTool/> Projetos sob medida</span><span><Sparkles/> Acabamento profissional</span></div></div></div><div className="hero-sign" aria-hidden="true"><div className="hero-sign-logo"><span className="hero-sign-mark"><i/><i/><i/></span><strong>SUL<br/>PRINT</strong></div><small>COMUNICAÇÃO VISUAL</small></div><img className="hero-person" src="/equipe-sulprint.svg?v=20261030-3" alt="Representante da Sulprint usando polo da empresa, com braços cruzados" loading="eager" fetchPriority="high" /><div className="hero-stamp">SUA MARCA<br/><strong>EM EVIDÊNCIA</strong><ArrowUpRight size={24}/></div></section>
+   <section className="hero" id="inicio"><div className="hero-image" style={{backgroundImage:`linear-gradient(90deg,rgba(11,15,54,.96) 0%,rgba(11,15,54,.84) 43%,rgba(11,15,54,.17) 100%),url('${photos.hero}')`}}/><div className="hero-lines" aria-hidden="true"><i/><i/><i/></div><div className="container hero-inner"><div className="hero-content"><span className="eyebrow light">COMUNICAÇÃO VISUAL QUE TRANSFORMA</span><h1>Sua marca ganha presença com <em>comunicação visual de impacto.</em></h1><p>Fachadas, adesivos, lonas, letras caixa, envelopamento e impressão digital. Soluções completas para destacar sua marca e atrair olhares.</p><div className="hero-actions"><ContactButton/></div></div></div><div className="hero-sign" aria-hidden="true"><div className="hero-sign-logo"><span className="hero-sign-mark"><i/><i/><i/></span><strong>SUL<br/>PRINT</strong></div><small>COMUNICAÇÃO VISUAL</small></div><img className="hero-person" src="/equipe-sulprint.svg?v=20261030-3" alt="Representante da Sulprint usando polo da empresa, com braços cruzados" loading="eager" fetchPriority="high" /><div className="hero-stamp">SUA MARCA<br/><strong>EM EVIDÊNCIA</strong><ArrowUpRight size={24}/></div></section>
    <section className="services section" id="servicos"><div className="container"><div className="section-top"><div><span className="eyebrow">NOSSOS SERVIÇOS</span><h2>Soluções completas<br/>em <em>comunicação visual.</em></h2></div><div className="section-aside"><p>Da ideia à instalação, desenvolvemos soluções que dão forma à identidade da sua empresa.</p><a className="text-link" href="#contato">Solicitar um projeto <ArrowUpRight size={17}/></a></div></div><div className="services-grid">{services.map(s=>{const Icon=s.icon;return <article key={s.title} className="service-card"><div className="service-image"><img src={s.image} alt={`Exemplo ilustrativo de ${s.title.toLowerCase()}`} loading="lazy"/></div><div className="service-detail"><span className="service-icon"><Icon size={20}/></span><div><h3>{s.title}</h3><p>{s.desc}</p></div></div></article>})}</div></div></section>
    <section className="manifesto" id="sobre"><div className="container manifesto-inner"><div><span className="eyebrow light">MAIS QUE IMPRESSÃO</span><h2>Não é só aparecer.<br/>É ser <em>lembrado.</em></h2></div><p>A comunicação visual certa conecta sua empresa às pessoas. Na Sulprint, cada detalhe é pensado para expressar o melhor da sua marca.</p><a className="btn btn-outline" href="#contato">Vamos criar juntos <ArrowUpRight size={18}/></a></div></section>
    <section className="facade-transform section" id="transforme-sua-fachada">
@@ -43,16 +67,11 @@ function Home(){
         <div>
           <span className="eyebrow">TRANSFORME SUA FACHADA</span>
           <h2>O impacto de um bom projeto começa <em>na fachada.</em></h2>
-          <p>Veja como revestimento em ACM, letreiro e identidade visual podem transformar a presença de uma loja. Arraste para comparar.</p>
-        </div>
-        <div className="facade-transform-benefits">
-          <span><Building2 size={22}/> Mais destaque na rua</span>
-          <span><Sparkles size={22}/> Uma imagem profissional</span>
-          <span><CheckCircle2 size={22}/> Mais valor para sua marca</span>
+          <p>Arraste a imagem e veja a mesma fachada com e sem o letreiro da Sulprint.</p>
         </div>
       </div>
       <div className="facade-compare-card">
-        <div className="facade-compare-stage">
+        <div className="facade-compare-stage" role="group" aria-label="Comparação interativa: a mesma fachada, com ou sem a marca Sulprint" onPointerDown={startFacadeDrag} onPointerMove={moveFacadeDrag} onPointerUp={stopFacadeDrag} onPointerCancel={()=>{facadeDragging.current=false}} onLostPointerCapture={()=>{facadeDragging.current=false}}>
           <img className="facade-compare-photo" src="/fachada-sulprint-antes.svg" alt="Antes: a mesma fachada comercial simples, sem acabamento especial ou letreiro externo" loading="lazy"/>
           <div className="facade-compare-after" style={{clipPath:`inset(0 0 0 ${facadePosition}%)`}} aria-hidden="true">
             <img className="facade-compare-photo" src="/fachada-sulprint-depois.svg" alt="" loading="lazy"/>
@@ -62,13 +81,14 @@ function Home(){
           <div className="facade-compare-divider" style={{left:`${facadePosition}%`}} aria-hidden="true">
             <span className="facade-compare-grip">↔</span>
           </div>
-          <input className="facade-compare-range" type="range" min="0" max="100" step="1" value={facadePosition} onChange={event=>setFacadePosition(Number(event.target.value))} aria-label="Arraste para comparar a fachada antes e depois da transformação" aria-valuetext={`${facadePosition}% da fachada antes, ${100-facadePosition}% da fachada depois`}/>
+          
         </div>
         <div className="facade-compare-footer">
           <div className="facade-compare-caption">
             <span className="facade-compare-caption-icon"><ArrowRight size={21}/></span>
-            <span><strong>Arraste o controle para ver a transformação.</strong><small>Simulação ilustrativa de uma fachada comercial com identidade Sulprint.</small></span>
+            <span><strong>Arraste a imagem para comparar.</strong><small>A mesma fachada, com e sem o letreiro Sulprint. Simulação ilustrativa.</small></span>
           </div>
+          <input className="facade-compare-range" type="range" min="0" max="100" step="1" value={facadePosition} onChange={event=>setFacadePosition(Number(event.target.value))} aria-label="Comparar fachada: arraste para mostrar mais ou menos do letreiro Sulprint" />
           <ContactButton className="facade-compare-cta">Quero transformar minha fachada</ContactButton>
         </div>
       </div>
