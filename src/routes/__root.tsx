@@ -10,7 +10,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { initializeMetaPixel, META_PIXEL_ID } from "../lib/meta-pixel";
 
 function NotFoundComponent() {
   return (
@@ -51,8 +50,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Criativo de Performance" },
-      { name: "description", content: "Criativos exclusivos para anúncios e tráfego pago." },
+      { title: "Sulprint Comunicação Visual" },
+      { name: "description", content: "Comunicação visual, fachadas, adesivos, letras caixa e impressão digital." },
       { name: "author", content: "Criativo de Performance" },
     ],
     links: [
@@ -73,15 +72,6 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-            alt=""
-          />
-        </noscript>
         {children}
         <Scripts />
       </body>
@@ -92,8 +82,5 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
-  useEffect(() => {
-    initializeMetaPixel();
-  }, []);
   return <QueryClientProvider client={queryClient}><Outlet /></QueryClientProvider>;
 }
