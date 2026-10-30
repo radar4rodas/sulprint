@@ -1,0 +1,79 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+@theme inline {
+  --color-background: #010918;
+  --color-foreground: #ffffff;
+  --color-primary: #00cfff;
+}
+:root {color-scheme:dark;}
+* {box-sizing:border-box;}
+html,body,#root {margin:0;min-height:100%;width:100%;background:#010918;}
+body {font-family:Arial,sans-serif;}
+.landing {
+  width:100%;min-height:100svh;display:grid;place-items:center;
+  background:#010918;
+  overflow-x:hidden;
+}
+.landing-visual {
+  position:relative;
+  width:min(100%, 600px);
+  max-height:100svh;
+  margin-inline:auto;
+  line-height:0;
+  aspect-ratio:941 / 1672;
+  overflow:hidden;
+}
+.landing-image {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  user-select:none;
+}
+/*
+ * O botão verde está na arte original.
+ * Esta é somente a camada INTERATIVA por cima da área já desenhada
+ * na imagem — sem ícones, textos, bordas ou outros overlays.
+ * Coordenadas relativas à arte aprovada de 941 x 1672.
+ */
+.whatsapp-hotspot {
+  position:absolute;
+  top:80.5%;
+  left:5.0%;
+  width:90%;
+  height:9.6%;
+  border:0;
+  padding:0;
+  border-radius:999px;
+  background:transparent;
+  color:transparent;
+  cursor:pointer;
+  display:block;
+  line-height:normal;
+  text-decoration:none;
+}
+.whatsapp-hotspot:disabled {cursor:default;}
+.whatsapp-hotspot:focus-visible {
+  outline:3px solid #ffffff;
+  outline-offset:2px;
+  box-shadow:0 0 0 6px #00c4ff;
+}
+.sr-only {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+@media (max-width:600px) {
+  .landing {align-items:start;}
+  .landing-visual {width:100%;}
+}
+@media (min-width:601px) {
+  .landing-visual {width:min(600px, calc(100svh * 941 / 1672));}
+}
