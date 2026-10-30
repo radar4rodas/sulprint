@@ -210,7 +210,8 @@
   .facade-compare-range{flex:1 1 140px}
 }
 @media(max-width:680px){
-  .hero-inner{padding:41px 0 362px}
+  /* Keep the portrait below the CTA, including at narrower phone widths. */
+  .hero-inner{padding:41px 0 calc(clamp(348px, 99vw, 402px) + 35px)}
   .hero-actions{margin-bottom:12px}
   .hero-person{
     height:clamp(348px,99vw,402px);max-height:none;
